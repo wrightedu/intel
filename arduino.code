@@ -1,0 +1,152 @@
+// Sample code from how I am creating this, NEEDS tested and debugged.
+
+
+/// https://www.mathworks.com/help/matlab/supportpkg/control-7-segment-display-with-74hc595-shift-register.html
+
+// from above:
+
+a = arduino('COM4','Uno','Libraries','ShiftRegister')
+
+dataPin = 'D8';
+clockPin = 'D7';
+latchPin = 'D5';
+register = shiftRegister(a,'74HC595',dataPin,clockPin,latchPin)
+
+// Table of Binary character vectors for all single digit numbers
+digitTable = {...
+    '11000000', ...  % 0
+    '11001111', ...  % 1
+  	'10100100', ...  % 2
+  	'10110000', ...  % 3
+  	'10011001', ...  % 4
+  	'10010010', ...  % 5
+  	'10000010', ...  % 6
+  	'11111000', ...  % 7
+  	'10000000', ...  % 8
+  	'10010000'  ...  % 9
+};
+
+    # Loops through 10 digits on display
+    for iLoop = 1:10
+       digit = digitTable{iLoop};
+       write(register,digit);
+       pause(0.5);
+    end
+
+    # Cleanup when connection is no longer needed
+    clear register a
+
+/// May want to check here too: http://www.goodliffe.org.uk/arduino/shift.php
+// From above:
+
+int dataPin  = 8;        //Define which pins will be used for the Shift Register control
+int latchPin = 5;
+int clockPin = 7;
+
+void setup()
+{
+    pinMode(dataPin, OUTPUT);       //Configure the 3 Pins needed
+    pinMode(latchPin, OUTPUT);
+    pinMode(clockPin, OUTPUT);
+    Serial.begin(9600);
+}
+
+// Below here needs a rewrite from the much above easier write/send for digits
+void loop()
+{
+  resetArray();    // Ensure each value in the array is set to 0 at the start.
+  
+  // Here, your additional code will set an array value to 1 as you require
+  // eg. :
+	Array[0] = 1;
+	Array[1] = 0;
+	Array[2] = 0;
+	Array[3] = 1;
+	Array[4] = 1;
+	Array[5] = 1;
+	Array[6] = 0;
+	Array[7] = 1;
+  
+  sendArray();		 // Send the 8 digit array to the shift register
+}
+
+//
+// resetArray - ensure each integer is 0. Use at the start of the program, and
+//              any time you want or need.
+void resetArray()
+{
+for (int i = 0; i<8; i++)
+  {
+    Array[i] = 0;
+  }
+}
+
+// sendArray
+// Calculate the vaalue to send (will be between 0 and 255), then send it to the shift
+// register
+// This is not the fastest code (!) to achieve the goal, but it's highly readable for
+// understanding how to control a shift register
+//
+void sendArray()
+{
+  int valueSent;
+  valueSent = Array[0] +        
+              Array[1] * 2 +    
+              Array[2] * 4 +    
+              Array[3] * 8 + 
+              Array[4] * 16 + 
+              Array[5] * 32 + 
+              Array[6] * 64 + 
+              Array[7] * 128;
+              
+  digitalWrite(latchPin, LOW);                       // Set latch LOW to start sending data
+  shiftOut(dataPin, clockPin, MSBFIRST, valueSent);  // Send the data
+  digitalWrite(latchPin, HIGH);                      // Set latch HIGH to end.
+  
+  Serial.print("Wrote ");
+  Serial.println(valueSent);
+}
+
+
+// Ultrasonic Distance sensor
+
+int trigPin = 12;
+int echoPin = 13;
+
+void setup()
+{
+    pinMode(echoPin, INPUT);       //Configure the 3 Pins needed
+    pinMode(trigPin, OUTPUT);
+    Serial.begin(9600);
+}
+
+void loop() {
+  long duration, distance;
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2) / 29.1;
+
+///This needs to be changed for RGB LED color control
+// This is where the LED On/Off happens
+// When the Red condition is met, the Green LED should turn off
+  if (distance < 4) {  
+    digitalWrite(led,HIGH);
+  digitalWrite(led2,LOW);
+}
+  else {
+    digitalWrite(led,LOW);
+    digitalWrite(led2,HIGH);
+  }
+  if (distance >= 200 || distance <= 0){
+    Serial.println("Out of range");
+  }
+  else {
+    Serial.print(distance);
+    Serial.println(" cm");
+  }
+  delay(500);
+} 
