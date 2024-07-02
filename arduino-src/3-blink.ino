@@ -27,8 +27,8 @@ void loop() {
 // output: visiable light from the LED for a specified amoutn of time
 // usage: flash(13, 1000);
 void flash(int pin_number, int delay_amount) {
-    digitalWrite(pin_num, 1);
+    digitalWrite(pin_number, 1);
     delay(delay_amount);
-    digitalWrite(pin_num, 0);
+    digitalWrite(pin_number, 0);
     delay(delay_amount);
 }
