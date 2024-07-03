@@ -11,6 +11,7 @@
 * Download and install Arduino IDE from here: https://www.arduino.cc/en/software
 * Arduino Simulator: [wokwi.com](https://wokwi.com)
 
-## Gerring started with KiCAD
+## Getting started with KiCAD
 
-Download and install KiCAD from here: https://www.kicad.org/download/
+* Download and install KiCAD from here: https://www.kicad.org/download/
+* Check out the in class example schematics in `./KiCad/` (we started with `./KiCad/7-segment-only.zip`)
