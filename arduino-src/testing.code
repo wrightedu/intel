@@ -7,9 +7,9 @@
 
 a = arduino('COM4','Uno','Libraries','ShiftRegister')
 
-dataPin = 'D8';
-clockPin = 'D7';
-latchPin = 'D5';
+dataPin = 'D7';
+clockPin = 'D5';
+latchPin = 'D6';
 register = shiftRegister(a,'74HC595',dataPin,clockPin,latchPin)
 
 // Table of Binary character vectors for all single digit numbers
@@ -39,9 +39,10 @@ digitTable = {...
 /// May want to check here too: http://www.goodliffe.org.uk/arduino/shift.php
 // From above:
 
-int dataPin  = 8;        //Define which pins will be used for the Shift Register control
-int latchPin = 5;
-int clockPin = 7;
+///// CHECK THIS, MAT CHANGED IT
+int dataPin  = 7;        //Define which pins will be used for the Shift Register control
+int latchPin = 6;
+int clockPin = 5;
 
 void setup()
 {
