@@ -20,10 +20,10 @@ void loop() {
   */
 
   // R diode
-  SoftPWMSet(8, 0);
+  SoftPWMSet(8, 255);
 
   // G diode
-  SoftPWMSet(9, 255);
+  SoftPWMSet(9, 0);
 
   // B diode
   SoftPWMSet(10, 0);

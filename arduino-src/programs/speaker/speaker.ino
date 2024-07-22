@@ -96,8 +96,7 @@
 #define NOTE_DS8 4978
 #define REST      0
 
-
-// change this to make the song slower or faster
+// change this to make the song slower or faster (225 default)
 int tempo = 225;
 
 // change this to whichever pin you want to use

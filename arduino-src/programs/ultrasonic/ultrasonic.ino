@@ -1,3 +1,7 @@
+// This program is untested and may not work.
+// If it doesn't, contact jekeltor on Discord (will appear as CSE Dev | Jake in WSU CSE-EE Server).
+// You can also email cse-support@wright.edu or hamblin.15@wright.edu
+
 const int trigPin = 12;
 const int echoPin = 13;
 

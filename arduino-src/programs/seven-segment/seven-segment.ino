@@ -46,7 +46,7 @@ const int sevenSegmentNumbers[18] = {
 
 void setup() {
   // Start serial output
-  Serial.begin(9600);
+  //Serial.begin(9600);
 
   // Set shift register pins as output
   pinMode(latchPin, OUTPUT);
@@ -63,6 +63,10 @@ void setup() {
 void loop() {
   // Get key pushed this loop
   char key = keypad.getKey();
+
+  // Uncomment the line below if you don't have working keypad.
+  // Changing the input to writeToDisplay will change the number shown
+  // writeToDisplay(5);
 
   // If a key was pushed
   if(key != NO_KEY) {
@@ -139,7 +143,7 @@ void shiftOut(int myDataPin, int myClockPin, byte myDataOut) {
 
     else {
       pinState = 0;
-    }Combine the bits to form the new value
+    }
 
     // Set data bit output
     digitalWrite(myDataPin, pinState);
