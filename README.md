@@ -18,7 +18,7 @@ Resources:
 
 # The Format
 
-* `\*.md` a markdown formatted file for pretty web rendering here
-* PowerPoint (`\*.pptx`) and `\*.pdf` files (self explanatory)
-* `\*.ino` files are for the arduino
+* `*.md` a markdown formatted file for pretty web rendering here
+* PowerPoint (`*.pptx`) and `*.pdf` files (self explanatory)
+* `*.ino` files are for the arduino
 
