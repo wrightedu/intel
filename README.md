@@ -1,5 +1,7 @@
 # Welcome!
 
+## Today we are meeting in: 152c Russ !
+
 Resources:
 
 * This site: [**github.com/wrightedu/intel**](github.com/wrightedu/intel)
