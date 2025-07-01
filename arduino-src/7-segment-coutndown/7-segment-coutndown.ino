@@ -19,39 +19,65 @@ void setup() {
   pinMode(g, OUTPUT);
 }
 
+void chase_tail(){
+  delay(100);
+  display(1,0,0,0,0,0,0);
+  delay(100);
+  display(1,1,0,0,0,0,0);
+  delay(100);
+  display(1,1,1,0,0,0,0);
+  delay(100);
+  display(0,1,1,0,0,0,0);
+  delay(100);
+  display(0,1,1,1,0,0,0);
+  delay(100);
+  display(0,0,1,1,0,0,0);
+  delay(100);
+  display(0,0,1,1,1,0,0);
+  delay(100);
+  display(0,0,0,1,1,0,0);
+  delay(100);
+  display(0,0,0,1,1,1,0);
+  delay(100);
+  display(0,0,0,0,1,1,0);
+  delay(100);
+  display(1,0,0,0,0,1,0);
+  delay(100);
+}
+
 // the loop function runs over and over again forever
-void loop() {
+void countdown() {
   
   //display a 9
   display(1,1,1,0,0,1,1);
-  delay(1000);
+  delay(500);
   
   display(1,1,1,1,1,1,1);    
-  delay(1000);
+  delay(500);
   
   display(1,1,1,0,0,0,0);     
-  delay(1000);
+  delay(500);
   
   display(1,0,1,1,1,1,1);
-  delay(1000);
+  delay(500);
   
   display(1,0,1,1,0,1,1);   
-  delay(1000);
+  delay(500);
   
   display(0,1,1,0,0,1,1);
   delay(1000);
   
   display(1,1,1,1,0,0,1);
-  delay(1000);
+  delay(500);
   
   display(1,1,0,1,1,0,1);
-  delay(1000);
+  delay(500);
   
   display(0,1,1,0,0,0,0);
-  delay(1000);
+  delay(500);
   
   display(1,1,1,1,1,1,0);
-  delay(1000);
+  delay(500);
 }
 
 // Description: clears the 7 segment display of all current lit LED's
@@ -81,4 +107,12 @@ void display(int astate, int bstate, int cstate, int dstate, int estate, int fst
   digitalWrite(e,estate); 
   digitalWrite(f,fstate);
   digitalWrite(g,gstate);
+}
+
+void loop(){
+  countdown();
+  chase_tail();
+  chase_tail();
+  chase_tail();
+
 }
