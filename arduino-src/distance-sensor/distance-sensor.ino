@@ -1,4 +1,4 @@
-oat duration, distance;
+float duration, distance;
 const int trig = 11;
 const int echo = 12;
 
