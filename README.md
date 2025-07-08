@@ -1,6 +1,8 @@
 # Welcome!
 
-## Today we are meeting in: 152c Russ !
+## Today we are meeting in: 346 / 348 Russ !
+
+If your deisgn has been approved by Matt you are mostly good to go, just check your email!
 
 Resources:
 
