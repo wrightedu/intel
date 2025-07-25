@@ -1,8 +1,8 @@
 # Welcome!
 
-## Today we are meeting in: 346 / 348 Russ !
+## Today we are meeting in: 152C Russ for our FINAL DAY!!!
 
-If your deisgn has been approved by Matt you are mostly good to go, just check your email!
+Great job on your designs all!  We will recume fabrication after lunch if anyone has any loose ends to tie up on their boards.
 
 Resources:
 
