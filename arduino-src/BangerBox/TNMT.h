@@ -1,4 +1,5 @@
 //TNMT Theme Song- code by MG Davis
+//fixed by Emily Creed
 
 #define NOTE_B0 31
 #define NOTE_C1 33
@@ -91,13 +92,13 @@
 #define NOTE_DS8 4978
 #define REST 0
 
-#define tempo 185 //how fast song is.
+#define tempo 140 //how fast song is.
 #define buzzer 11
 #define red 6
 #define blue 5
 #define green 3
 
-void TNMT() {
+void TMNT() {
     int divider = 0, noteDuration = 0;
     int wholenote = (60000 * 2) / tempo;
     
@@ -105,16 +106,15 @@ void TNMT() {
     // a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
     // !!negative numbers are used to represent dotted notes,
     // so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
-    // lava chicken
     int melody[] = {
         NOTE_G4, 4, NOTE_A4, 4, NOTE_G4, 4, NOTE_A4, 4, 
         NOTE_G4, 4, NOTE_A4, 8,  NOTE_G4, 8, REST, 8, NOTE_A4, 8, REST, 4,
         NOTE_AS4, 4, NOTE_C5, 4, NOTE_AS4, 4, NOTE_C5, 4,
         NOTE_AS4, 4, NOTE_C5, 8, NOTE_G4, 8, REST, 8, NOTE_C5, 8, REST, 4,
-        NOTE_F4, 4 NOTE_F5, 4, NOTE_DS5, 4, NOTE_F5, 4,
-        NOTE_F4, 4, NOTE_F5, 8, NOTE_DS5, 8, REST, 8, NOTE_F5, 8 REST, 8,
+        NOTE_F4, 4, NOTE_F5, 4, NOTE_DS5, 4, NOTE_F5, 4,
+        NOTE_F4, 4, NOTE_F5, 8, NOTE_DS5, 8, REST, 8, NOTE_F5, 8, REST, 8,
         NOTE_C6, 8, NOTE_C6, 8, NOTE_C6, 8, NOTE_C6, 8, NOTE_AS5, 4, NOTE_C6, 4,
-        REST, 4, NOTE_C6, 8, NOTE_C6, 8, NOTE_C6, NOTE_C6, 8, REST, 4
+        REST, 4, NOTE_C6, 8, NOTE_C6, 8, NOTE_C6, NOTE_C6, 2,
 
     };
 
@@ -146,5 +146,14 @@ void TNMT() {
 
         // stop the waveform generation before the next note.
         noTone(buzzer);
-    }
+}
+}
+void setup() {
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ 
 }
