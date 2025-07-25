@@ -1,6 +1,11 @@
 float duration, distance;
+
+// Pins
 const int trig = 11;
 const int echo = 12;
+const int data = 5; 
+const int latch = 6;
+const int clock = 7;
 
 const int a = 8, 
           b = 7, 
@@ -13,6 +18,8 @@ const int a = 8,
 
 const int pins[] = {a, b, c, d, e, f, g, dp};
 // const int pins[] = {8, 7, 6, 5, 4, 3, 2, 9};
+byte leds = 0;
+
 
 /*
  * * a * *
@@ -42,70 +49,68 @@ const byte digitMap[11] = {
   0b00000000  // -> erase
 };
 
-void displayDigit(int digit) {
-  for (int i = 0; i < 7; i++) {
-    /*
-      * We are comparing the digit within the map
-      * using the bitwise AND operator
-      * to check if the corresponding segment should be on or off.
-      * by shifting a 1 bit (00000001) to the left i times
-      */
-    bool on = digitMap[digit] & (1 << i);
-
-    /* 
-      * And then using the boolean value we can do a small logic of
-      * if on is true, set the pin HIGH, otherwise LOW
-      */
-    digitalWrite(pins[i], on ? HIGH : LOW);
-  }
+void updateShiftRegister() {
+  digitalWrite(latch, LOW);
+  shiftOut(data, clock, MSBFIRST, leds);
+  digitalWrite(latch, HIGH);
 }
+
+void displayDigit(int digit) {
+  leds = digitMap[digit];
+  updateShiftRegister();
+  // for (int i = 0; i < 7; i++) {
+  //   /*
+  //     * We are comparing the digit within the map
+  //     * using the bitwise AND operator
+  //     * to check if the corresponding segment should be on or off.
+  //     * by shifting a 1 bit (00000001) to the left i times
+  //     */
+  //   bool on = digitMap[digit] & (1 << i);
+
+  //   /* 
+  //     * And then using the boolean value we can do a small logic of
+  //     * if on is true, set the pin HIGH, otherwise LOW
+  //     */
+  //   digitalWrite(pins[i], on ? HIGH : LOW);
+  // }
+}
+
 
 void setup() {
-  Serial.begin(9600);
-
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
-  pinMode(9, OUTPUT);
-  
-  for (int i = 0; i < 7; i++) 
-    pinMode(pins[i], OUTPUT);
+  pinMode(latch, OUTPUT);
+  pinMode(data, OUTPUT);
+  pinMode(clock, OUTPUT);
+
+  Serial.begin(9600);
 }
 
+
 void loop() {
-  // Just making sure that the trigger pin is set to LOW
-  // to avoid any false readings
+  leds = 0;
+  updateShiftRegister(); // clear
   digitalWrite(trig, LOW);
   delayMicroseconds(2);
 
-  // Setting the trigger pin to HIGH for 10 microseconds
-  // to send the ultrasonic pulse.
-  // Why 10 microseconds? Because the datasheet said so.
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
 
-  // Then resetting it back to LOW
   digitalWrite(trig, LOW);
 
-  // The echo pin will receive a continuous HIGH pulse from the sensor
-  // for the duration it takes for the ultrasonic pulse to travel
-  // and using pulseIn we can measure the duration of that pulse
   duration = pulseIn(echo, HIGH);
 
-  // Calculating the distance by taking the duration
-  // it took from the trigger to the echo from the sensor
-  // and multiplying it by the speed of sound in feet per microsecond
-  // and dividing it by 2, because the ultrasonic waves travels out and back
   distance = (duration * 0.00112533) / 2;
 
   Serial.print("Distance: ");
   Serial.println(distance);
 
-  // If the distance is too far, we will clear the display
-  if (distance >= 0 && distance <= 9) {
+  if (distance >= 0 && distance <= 9)
     displayDigit(round(distance));
-  } else {
+  else  
     displayDigit(10);
-  }
 
   delay(500);
 }
+
+
