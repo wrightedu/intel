@@ -1,4 +1,5 @@
 #include "pitches.h"
+#include <Keypad.h>
 
 // Global variables to specify pin locations 
 int sr_data = 7;
@@ -9,8 +10,24 @@ int rgb_g = 9;
 int rgb_b = 10;
 int speaker = 11;
 
+// 7 segment setup data
 byte data;
 byte seven_segment[10];
+
+//keypad setup data
+const byte ROWS = 4; 
+const byte COLS = 4; 
+char hexaKeys[ROWS][COLS] = {
+  {'1', '2', '3', 'A'},
+  {'4', '5', '6', 'B'},
+  {'7', '8', '9', 'C'},
+  {'*', '0', '#', 'D'}
+};
+
+byte rowPins[ROWS] = {4, 3, 1, 0}; 
+byte colPins[COLS] = {19, 18, 17, 16}; 
+
+Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
 // initialize needed pins as output
 void setup() {
@@ -41,6 +58,9 @@ void setup() {
   pinMode(sr_data, OUTPUT);
   Serial.begin(9600);
 
+  blinkAll_2Bytes(2,500);
+
+
   //Binary notation as comment
   seven_segment[0] = 0xFF; //0b11111111
   seven_segment[1] = 0xFE; //0b11111110
@@ -53,11 +73,16 @@ void setup() {
   seven_segment[8] = 0x00; //0b00000000
   seven_segment[9] = 0xE0; //0b11100000
 
-  blinkAll_2Bytes(2,500);
 }
 
 // the loop function runs over and over again forever
 void loop() {
+//basic keypad functionality
+  char customKey = customKeypad.getKey();
+  
+  if (customKey){
+    Serial.println(customKey);
+  }
 // dont do anything yet...
 }
 

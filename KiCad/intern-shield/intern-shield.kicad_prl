@@ -41,7 +41,6 @@
       11,
       12,
       13,
-      14,
       15,
       16,
       17,
@@ -74,7 +73,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "7SegTester.kicad_prl",
+    "filename": "intern-shield.kicad_prl",
     "version": 3
   },
   "project": {
