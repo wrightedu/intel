@@ -3,7 +3,7 @@
 #include "LavaChicken.h"
 #include "RickRoll.h"
 #include "CrabRave.h"
-
+#include "TNMT.h"
 
 // Shift register pins
 int latchPin = 6;
@@ -108,6 +108,12 @@ void loop() {
         digitalWrite(red, 1);
         digitalWrite(blue, 1);
         rickRoll();
+      } else if (codeInput == "7777") {
+        writeToDisplay(9);
+        digitalWrite(green,1);
+        digitalWrite(red, 0);
+        digitalWrite(blue, 0);
+        TMNT();
       } else if (codeInput == "2722") {
         writeToDisplay(5);
         crabRave();
